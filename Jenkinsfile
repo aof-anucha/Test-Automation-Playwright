@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs "node25"
+    }
+
     environment {
         // ดึงค่า Config จาก Jenkins Credentials (ถ้ามี) 
         // หรือจะใส่ตรงๆ เพื่อทดสอบก่อนก็ได้
@@ -15,6 +19,8 @@ pipeline {
             steps {
                 // ติดตั้ง node_modules
                 sh 'npm ci'
+
+                sh 'npx playwright install --with-deps'
             }
         }
 
