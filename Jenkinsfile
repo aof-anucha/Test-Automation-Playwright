@@ -40,7 +40,7 @@ pipeline {
             ])
             
             // เก็บไฟล์อื่นๆ เช่น Screenshot หรือ Video ถ้าเทสพัง
-            archiveArtifacts artifacts: 'test-results/**', intermediate: true
+            archiveArtifacts artifacts: 'test-results/**', allowEmptyArchive: true
         }
     }
 }
