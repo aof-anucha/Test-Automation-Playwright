@@ -1,8 +1,9 @@
 pipeline {
-    agent any
-
-    tools {
-        nodejs "node22"
+    agent {
+            docker {
+                image 'mcr.microsoft.com/playwright:v1.52.0-jammy'
+                args  '-u root'
+            }
     }
 
     environment {
@@ -21,8 +22,6 @@ pipeline {
                 dir('automation script') {
                     // ติดตั้ง node_modules
                     sh 'npm ci'
-
-                    sh 'npx playwright install chromium'
                 }
             }
         }
