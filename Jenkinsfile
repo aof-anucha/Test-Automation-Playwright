@@ -22,7 +22,7 @@ pipeline {
                     // ติดตั้ง node_modules
                     sh 'npm ci'
 
-                    sh 'npx playwright install --with-deps'
+                    sh 'npx playwright install chromium'
                 }
             }
         }
