@@ -17,18 +17,23 @@ pipeline {
     stages {
         stage('Install Dependencies') {
             steps {
-                // ติดตั้ง node_modules
-                sh 'npm ci'
 
-                sh 'npx playwright install --with-deps'
+                dir('automation script') {
+                    // ติดตั้ง node_modules
+                    sh 'npm ci'
+
+                    sh 'npx playwright install --with-deps'
+                }
             }
         }
 
         stage('Run Playwright Tests') {
             steps {
-                // รันเทสทั้งหมด (ทั้ง UI และ API)
-                // ใส่ || true เพื่อให้ Pipeline รันต่อแม้เทสจะ Fail (เพื่อไปทำ Report)
-                sh 'npx playwright test || true'
+                dir('automation script') {
+                    // รันเทสทั้งหมด (ทั้ง UI และ API)
+                    // ใส่ || true เพื่อให้ Pipeline รันต่อแม้เทสจะ Fail (เพื่อไปทำ Report)
+                    sh 'npx playwright test || true'
+                }
             }
         }
     }
@@ -40,13 +45,13 @@ pipeline {
                 allowMissing: false,
                 alwaysLinkToLastBuild: true,
                 keepAll: true,
-                reportDir: 'playwright-report',
+                reportDir: 'automation script/playwright-report',
                 reportFiles: 'index.html',
                 reportName: 'Playwright HTML Report'
             ])
             
             // เก็บไฟล์อื่นๆ เช่น Screenshot หรือ Video ถ้าเทสพัง
-            archiveArtifacts artifacts: 'test-results/**', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'automation script/test-results/**', allowEmptyArchive: true
         }
     }
 }
