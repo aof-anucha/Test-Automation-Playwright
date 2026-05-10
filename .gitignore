@@ -6,6 +6,7 @@ playwright-report/
 /playwright/.auth/
 config/
 
-/Check duplicate item.py
-/Cipher copy.py
-/Cipher.py
+# /Check duplicate item.py
+# /Cipher copy.py
+# /Cipher.py
+.DS_Store

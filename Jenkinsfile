@@ -8,7 +8,7 @@ pipeline {
 
     environment {
         // ดึงค่า Config จาก Jenkins Credentials (ถ้ามี) 
-        // หรือจะใส่ตรงๆ เพื่อทดสอบก่อนก็ได้
+
         BASE_URL = 'https://the-internet.herokuapp.com/login'
         SITE_AUTH = credentials('site-login-credentials')
         API_URL = 'https://reqres.in/api'
